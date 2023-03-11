@@ -11,7 +11,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	w.Write([]byte("Hello from Snippetboxs "))
+	w.Write([]byte("Hello from Snippetbox "))
 }
 
 func showSnippet(w http.ResponseWriter, r *http.Request) {
