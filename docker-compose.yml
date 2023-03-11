@@ -7,3 +7,5 @@ services:
       target: dev
     volumes:
       - .:/opt/app/api
+    ports:
+      - "4000:4000"
