@@ -24,4 +24,12 @@ In Go, a common and idiomatic way to manage configuration settings is to use com
 The easiest way to accept and parse a command line flag from your application is with a line of code like this:
    addr := flag.String("addr", ":4000", "HTTP network address")
 
+LEVELED LOG:
+ Decoupled logging:
+ 
+In staging or production environments, you can redirect the streams to a final destination
+for viewing and archival. This destination could be on-disk files, or a logging service such as
+Splunk. Either way, the final destination of the logs can be managed by your execution
+environment independently of the application.
+
 
