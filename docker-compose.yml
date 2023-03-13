@@ -11,7 +11,8 @@ services:
       - "4000:4000"
     depends_on:
       - db
-  
+    networks:
+      - appmysql
   db:
     image: mysql
     restart: always
@@ -22,6 +23,11 @@ services:
       MYSQL_PASSWORD: pass
     volumes:
       - mysql:/var/lib/mysql
+    networks:
+      - appmysql
 volumes:
   mysql:
+
+networks:
+  appmysql
     
