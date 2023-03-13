@@ -13,6 +13,11 @@ services:
       - db
     networks:
       - appmysql
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: rootpassword
+      MYSQL_DB: snippetbox
   db:
     image: mysql
     restart: always
