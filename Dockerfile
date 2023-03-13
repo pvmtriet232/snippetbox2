@@ -25,4 +25,5 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /snippetbox2
 # https://docs.docker.com/engine/reference/builder/#expose
 
 # Run
+EXPOSE 4000
 CMD [ "/snippetbox2" ]
