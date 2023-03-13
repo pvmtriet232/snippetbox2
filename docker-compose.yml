@@ -9,3 +9,19 @@ services:
       - .:/app
     ports:
       - "4000:4000"
+    links:
+      - db
+  
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: wppassword
+      MYSQL_DATABASE: wpdb
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppassword
+    volumes:
+      - mysql:/var/lib/mysql
+volumes:
+  mysql:
+    
