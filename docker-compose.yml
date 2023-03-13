@@ -29,5 +29,6 @@ volumes:
   mysql:
 
 networks:
-  appmysql
+  appmysql:
+    driver: bridge
     
