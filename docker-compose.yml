@@ -23,7 +23,7 @@ services:
       MYSQL_USER: web
       MYSQL_PASSWORD: pass
     volumes:
-      - mysql:/var/lib/mysql
+      - snippet-db:/var/lib/mysql
 volumes:
-  mysql:
+  snippet-db:
     
