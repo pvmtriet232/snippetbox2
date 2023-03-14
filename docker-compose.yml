@@ -1,8 +1,8 @@
 version: "3.9"
 services:
   app:
-    build:
-      dockerfile: Dockerfile
+    image: golang:1.20-alpine
+    command: sh -c "go run ./cmd/web"
     ports:
       - "4000:4000"
     working_dir: /app
