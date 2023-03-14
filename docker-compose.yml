@@ -8,8 +8,6 @@ services:
     working_dir: /app
     volumes:
       - .:/app
-    depends_on:
-      - db
     environment:
       MYSQL_HOST: mysql
       MYSQL_USER: root
