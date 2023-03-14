@@ -19,7 +19,7 @@ COPY cmd/web/ ./
 # Build
 RUN CGO_ENABLED=0 GOOS=linux go build -o /snippetbox2
 
-FROM alpine:latest
+FROM alpine:latest as final
 COPY --from=built /app /app
 CMD [ "/snippetbox2" ]
 
