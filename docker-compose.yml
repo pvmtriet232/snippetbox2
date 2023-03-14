@@ -10,8 +10,8 @@ services:
       - .:/app
     environment:
       MYSQL_HOST: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: rootpassword
+      MYSQL_USER: web
+      MYSQL_PASSWORD: pass
       MYSQL_DB: snippetbox
   mysql:
     image: mysql
