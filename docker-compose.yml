@@ -3,22 +3,18 @@ services:
   app:
     build:
       dockerfile: Dockerfile
-      context: .
-      target: base
     volumes:
       - .:/app
     ports:
       - "4000:4000"
     depends_on:
       - db
-    networks:
-      - appmysql
     environment:
-      MYSQL_HOST: db
+      MYSQL_HOST: mysql
       MYSQL_USER: root
       MYSQL_PASSWORD: rootpassword
       MYSQL_DB: snippetbox
-  db:
+  mysql:
     image: mysql
     restart: always
     environment:
@@ -28,12 +24,6 @@ services:
       MYSQL_PASSWORD: pass
     volumes:
       - mysql:/var/lib/mysql
-    networks:
-      - appmysql
 volumes:
   mysql:
-
-networks:
-  appmysql:
-    driver: bridge
     
