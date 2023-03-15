@@ -12,7 +12,7 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build ./cmd/web 
 
 
-CMD [ "./web" ]
-# FROM alpine:latest as final
-# COPY --from=built /app /app
-# CMD [ "/snippetbox2" ]
+FROM alpine:latest as final
+
+COPY --from=built web .
+CMD [ "web" ]
