@@ -1,13 +1,12 @@
 version: "3.9"
 services:
   app:
-    image: golang:1.20-alpine
-    command: sh -c "go run ./cmd/web"
+    build:
+      dockerfile: Dockerfile
+      target: final
+    command: sh -c "cd app && ./web"
     ports:
       - "4000:4000"
-    working_dir: /app
-    volumes:
-      - ./:/app
     environment:
       MYSQL_HOST: mysql
       MYSQL_USER: web
