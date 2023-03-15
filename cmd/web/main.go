@@ -25,7 +25,7 @@ func main() {
 
 	addr := flag.String("addr", ":4000", "HTTP network address")
 	// Define a new command-line flag for the MySQL DSN string.
-	dsn := flag.String("dsn", "web:pass@tcp(mysql-snippet:3306)/snippetbox", "MySQL data source name")
+	dsn := flag.String("dsn", "web:pass@tcp(mysql-snippet:3306)/snippetbox?parseTime=true", "MySQL data source name")
 	flag.Parse()
 
 	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
