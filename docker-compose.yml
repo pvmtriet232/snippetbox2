@@ -4,8 +4,8 @@ services:
     build:
       dockerfile: Dockerfile
       target: final
-    # working_dir: /app
-    # command: sh -c "cd app && ./web"
+    working_dir: /app
+    command: sh -c "cd app && ./web"
     ports:
       - "4000:4000"
     environment:
