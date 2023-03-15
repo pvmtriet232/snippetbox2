@@ -21,17 +21,12 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 
 	ts, err := template.ParseFiles(files...)
 	if err != nil {
-		// Because the home handler function is now a method against application
-		// it can access its fields, including the error logger. We'll write the log
-		// message to this instead of the standard logger.
 		app.errorLog.Println(err.Error())
 		app.serverError(w, err)
 		return
 	}
 	err = ts.Execute(w, nil)
 	if err != nil {
-		// Also update the code here to use the error logger from the application
-		// struct.
 		app.errorLog.Println(err.Error())
 		app.serverError(w, err)
 	}
@@ -39,8 +34,6 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello from Snippetbox27"))
 }
 
-// Change the signature of the showSnippet handler so it is defined as a method
-// against *application.
 func (app *application) showSnippet(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(r.URL.Query().Get("id"))
 	if err != nil || id < 1 {
@@ -56,5 +49,17 @@ func (app *application) createSnippet(w http.ResponseWriter, r *http.Request) {
 		app.clientError(w, http.StatusMethodNotAllowed)
 		return
 	}
-	w.Write([]byte("Create a new snippet..."))
+	// Create some variables holding dummy data. We'll remove these later on
+	// during the build.
+	title := "O snail"
+	content := "O snail\nClimb Mount Fuji,\nBut slowly, slowly!\n\n– Kobayashi Issa"
+	expires := "7"
+
+	id, err := app.snippets.Insert(title, content, expires)
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+	http.Redirect(w, r, fmt.Sprintf("/snippet?id=%d", id), http.StatusSeeOther)
+
 }
