@@ -13,5 +13,9 @@ RUN CGO_ENABLED=0 GOOS=linux go build ./cmd/web
 
 
 FROM alpine:latest as final
+WORKDIR /app
+COPY --from=built /app/web ./
+COPY --from=built /app/ui/ ./ui
 
-COPY --from=built . ./
+
+
