@@ -43,6 +43,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	// }
 
 	// w.Write([]byte("Hello from Snippetbox27"))
+	//
 }
 
 func (app *application) showSnippet(w http.ResponseWriter, r *http.Request) {
