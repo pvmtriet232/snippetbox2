@@ -1,4 +1,4 @@
-This is a golang web server project. 
+This is a snippets saving service project
 
 
 
