@@ -50,10 +50,9 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, name stri
 	}
 	// Initialize a new buffer.
 	buf := new(bytes.Buffer)
-	// Write the template to the buffer, instead of straight to the
-	// http.ResponseWriter. If there's an error, call our serverError helper and then
-	// return.
-	err := ts.Execute(buf, td)
+	// Execute the template set, passing the dynamic data with the current
+	// year injected.
+	err := ts.Execute(buf, app.addDefaultData(td, r))
 	if err != nil {
 		app.serverError(w, err)
 		return
