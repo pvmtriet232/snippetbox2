@@ -48,7 +48,6 @@ func (app *application) showSnippet(w http.ResponseWriter, r *http.Request) {
 func (app *application) createSnippetForm(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Create a new snippet..."))
 }
-
 func (app *application) createSnippet(w http.ResponseWriter, r *http.Request) {
 	// Checking if the request method is a POST is now superfluous and can be
 	// removed.
