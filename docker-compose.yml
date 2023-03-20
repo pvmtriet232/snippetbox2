@@ -1,11 +1,10 @@
 version: "3.9"
 services:
   app:
-    build:
-      dockerfile: Dockerfile
-      target: built
+    volumes:
+      - ./:/app
     working_dir: /app
-    command: sh -c "./web"
+    command: sh -c "go run ./cmd/web"
     ports:
       - "4000:4000"
     environment:
