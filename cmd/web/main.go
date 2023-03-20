@@ -24,6 +24,7 @@ type application struct {
 	session       *sessions.Session
 	snippets      *mysql.SnippetModel
 	templateCache map[string]*template.Template
+	Flash         string
 }
 
 func main() {
