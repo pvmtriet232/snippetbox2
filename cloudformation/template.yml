@@ -1,0 +1,88 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  VPC:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CidrBlock: '10.0.0.0/16'
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: eks-vpc
+  InternetGateway:
+    Type: 'AWS::EC2::InternetGateway'
+    Properties:
+      Tags:
+        - Key: Name
+          Value: eks-igw
+  VPCGatewayAttachment:
+    Type: 'AWS::EC2::VPCGatewayAttachment'
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref InternetGateway
+  Subnet1:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      CidrBlock: '10.0.1.0/24'
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 0, !GetAZs '' ]
+      Tags:
+        - Key: Name
+          Value: eks-subnet-1
+  Subnet2:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      CidrBlock: '10.0.2.0/24'
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 1, !GetAZs '' ]
+      Tags:
+        - Key: Name
+          Value: eks-subnet-2
+  SecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: EKS Worker Nodes
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: eks-security-group
+  Cluster:
+    Type: 'AWS::EKS::Cluster'
+    Properties:
+      Name: eks-cluster
+      RoleArn: !Sub 'arn:aws:iam::${AWS::AccountId}:role/eks-cluster-role'
+      Version: '1.21'
+      ResourcesVpcConfig:
+        SecurityGroupIds:
+          - !Ref SecurityGroup
+        SubnetIds:
+          - !Ref Subnet1
+          - !Ref Subnet2
+  DBSubnetGroup:
+    Type: 'AWS::RDS::DBSubnetGroup'
+    Properties:
+      DBSubnetGroupName: eks-db-subnet-group
+      DBSubnetGroupDescription: Subnet group for RDS instance
+      SubnetIds:
+        - !Ref Subnet1
+        - !Ref Subnet2
+  DBInstance:
+    Type: 'AWS::RDS::DBInstance'
+    Properties:
+      DBInstanceIdentifier: eks-rds-instance
+      Engine: mysql
+      EngineVersion: '8.0.25'
+      DBInstanceClass: db.t3.micro
+      DBName: eks_db
+      MasterUsername: admin
+      MasterUserPassword: adminpassword
+      AllocatedStorage: '20'
+      DBSubnetGroupName: !Ref DBSubnetGroup
+Outputs:
+  ClusterName:
+    Value: !Ref Cluster
+  ClusterEndpoint:
+    Value: !GetAtt [ Cluster, Endpoint ]
+  RDSHostname:
+    Value: !GetAtt [ DBInstance, Endpoint.Address ]
