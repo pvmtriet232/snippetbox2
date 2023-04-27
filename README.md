@@ -1,4 +1,5 @@
-This is a snippets saving service project
+# A website to save helpful snippet 
+
 
 
 
