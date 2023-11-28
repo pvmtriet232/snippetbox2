@@ -25,10 +25,8 @@ services:
       MYSQL_USER: web
       MYSQL_PASSWORD: pass
     volumes:
-      - snippet-db:/var/lib/mysql
+      - ./mysql-dump:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "mysqladmin", "ping","-h", "mysql"]
       timeout: 3s
       retries: 3
-volumes:
-  snippet-db:
