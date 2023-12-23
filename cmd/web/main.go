@@ -30,6 +30,7 @@ func main() {
 
 	addr := flag.String("addr", ":4000", "HTTP network address")
 	dsn := flag.String("dsn", "web:pass@tcp(mysql-snippet:3306)/snippetbox?parseTime=true", "MySQL data source name")
+	// Printf("dns")
 	flag.Parse()
 	// Define a new command-line flag for the session secret (a random key which
 	// will be used to encrypt and authenticate session cookies). It should be 32// will be used to encrypt and authenticate session cookies). It should be 32
