@@ -1,9 +1,0 @@
-# config.txt
-export SECRET=foobar
-export EKS_CLUSTER_NAME="DevOps"
-export REGION="ap-southeast-1"
-export APP_NAMESPACE=snippetbox
-export RDS_SUBNET_GROUP_NAME="RDS_SUBNET_GROUP"
-export RDS_SUBNET_GROUP_DESCRIPTION="RDS_SUBNET_GROUP_DS"
-export EKS_VPC_ID=$(aws eks describe-cluster --name="${EKS_CLUSTER_NAME}" --query "cluster.resourcesVpcConfig.vpcId" --output text)
-export EKS_SUBNET_IDS=$(aws ec2 describe-subnets --filters "Name=vpc-id,Values=${EKS_VPC_ID}" --query 'Subnets[*].SubnetId' --output text) 
