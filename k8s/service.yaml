@@ -24,7 +24,7 @@ metadata:
   creationTimestamp: null
   labels:
     run: snippetbox
-  name: snippetbox-new
+  name: snippetbox-sv
 spec:
   ports:
   - port: 4000
