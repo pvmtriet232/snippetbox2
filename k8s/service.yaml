@@ -29,19 +29,4 @@ spec:
     run: snippetbox
     tier: frontend
   type: LoadBalancerapiVersion: v1
-kind: Service
-metadata:
-  creationTimestamp: null
-  labels:
-    run: snippetbox
-  name: snippetbox-sv
-spec:
-  ports:
-  - port: 4000
-    protocol: TCP
-    targetPort: 4000
-  selector:
-    run: snippetbox
-  type: LoadBalancer
-status:
-  loadBalancer: {}
+
