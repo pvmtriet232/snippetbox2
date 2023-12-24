@@ -28,5 +28,5 @@ spec:
   selector:
     run: snippetbox
     tier: frontend
-  type: LoadBalancerapiVersion: v1
+  type: LoadBalancer
 
