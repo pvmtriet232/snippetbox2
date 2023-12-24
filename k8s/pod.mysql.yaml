@@ -6,6 +6,10 @@ metadata:
     run: mysql
   name: mysql
 spec:
+  volumes:
+    - name: initdb
+      configMap:
+        name: initdb-config
   containers:
   - env:
     - name: MYSQL_ROOT_PASSWORD
@@ -20,11 +24,7 @@ spec:
     name: mysql
     ports:
     - containerPort: 3306
-    volumesMounts:
+    volumeMounts:
       - name: initdb
-        mouthPath: /docker-entrypoint-initdb.d
+        mountPath: /docker-entrypoint-initdb.d
   restartPolicy: Always
-volumes:
-  - name: initdb
-    configmap:
-      name: initdb-config
