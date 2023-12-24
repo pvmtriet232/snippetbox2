@@ -20,7 +20,11 @@ spec:
     name: mysql
     ports:
     - containerPort: 3306
-    resources: {}
-  dnsPolicy: ClusterFirst
+    volumesMounts:
+      - name: initdb
+        mouthPath: /docker-entrypoint-initdb.d
   restartPolicy: Always
-status: {}
+volumes:
+  - name: initdb
+    configmap:
+      name: initdb-config
