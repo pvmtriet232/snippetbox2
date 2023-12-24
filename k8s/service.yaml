@@ -16,17 +16,22 @@ status:
   loadBalancer: {}
 ---
 
+
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: snippetbox-service
+  creationTimestamp: null
   labels:
     run: snippetbox
+  name: snippetbox-new
 spec:
   ports:
-    - port: 4000
+  - port: 4000
+    protocol: TCP
+    targetPort: 4000
   selector:
     run: snippetbox
-    tier: frontend
   type: LoadBalancer
-
+status:
+  loadBalancer: {}
