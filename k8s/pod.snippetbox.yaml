@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: snippetbox
+  name: snippetbox
+  namespace: default
+spec:
+  containers:
+  - command:
+    - ./web
+    - -dsn=web:pass@tcp(10.245.10.134:3306)/snippetbox?parseTime=true
+    env:
+    - name: MYSQL_HOST
+      value: mysql
+    - name: MYSQL_USER
+      value: web
+    - name: MYSQL_PASSWORD
+      value: pass
+    - name: MYSQL_DB
+      value: snippetbox
+    image: ghcr.io/pvmtriet232/snippetbox2:main
+    imagePullPolicy: Always
+    name: snippetbox
+    ports:
+    - containerPort: 4000
+      protocol: TCP
