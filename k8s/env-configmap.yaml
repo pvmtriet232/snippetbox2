@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: app-config
+data:
+  db_host: "10.245.10.134:3306"
+  MYSQL_HOST: mysql
+  MYSQL_USER: web
+  MYSQL_DATABASE: snippetbox
+  MYSQL_PASSWORD: pass
+  MYSQL_ROOT_PASSWORD: rootpassword
+
